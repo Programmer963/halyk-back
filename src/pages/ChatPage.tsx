@@ -17,12 +17,12 @@ export const ChatPage = () => {
     }])
     const ref = useRef<HTMLDivElement>(null);
     const [answer, setAnswer] = useState<string | undefined>()
-    const [requestText, setRequestText] = useState<string | undefined>()
+    const [requestText, setRequestText] = useState<string | undefined>(undefined)
     const refInput = useRef<HTMLInputElement>(null)
 
     const request = async () => {
         setAnswer(undefined)
-        const response = await fetch("https://halyk-life-bot-api.vercel.app/", {
+        const response = await fetch("http://localhost:2002/aiCompletion", {
             method: "post",
             headers: {
                 Accept: "application/json, text/plain, */*",
@@ -54,6 +54,10 @@ export const ChatPage = () => {
         setRequestText(undefined)
     }
 
+    ref.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+    });
 
     useEffect(() => {
         if (messages.length > 1) {
@@ -88,11 +92,14 @@ export const ChatPage = () => {
                 }
             </div>
             <div className={'self-center w-full flex mt-3 h-12'}>
-                <input type="text" placeholder={'Type something'} className={'p-3 w-full rounded-2xl'}
+                <input type="text"
+                       placeholder={'Задайте вопрос. Например: Ты кто?'} className={'p-3 w-full rounded-2xl'}
                        ref={refInput}
                        onChange={e => {
                            setRequestText(e.currentTarget.value);
-                       }}/>
+                       }}
+
+                />
                 <button className={'bg-green-700 p-3 text-white rounded-2xl ml-2 disabled:bg-gray-700'}
                         type={'button'} onClick={() => {
                     refInput!.current!.value = ""

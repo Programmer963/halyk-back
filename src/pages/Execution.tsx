@@ -68,8 +68,8 @@ const Execution = () => {
         }
 
         const deathAnyReason = insuranceSum;
-        const deathAccident = insuranceSum;
-        const survival = insuranceSum;
+        const deathAccident = insuranceSum * 1.2;
+        const survival = insuranceSum * 0.8;
 
         document.getElementById('deathAnyReasonValue')!.innerText = deathAnyReason.toLocaleString('en-US') + ' тг';
         document.getElementById('deathAccidentValue')!.innerText = deathAccident.toLocaleString('en-US') + ' тг';
